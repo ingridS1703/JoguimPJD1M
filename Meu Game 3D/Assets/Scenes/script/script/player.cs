@@ -10,7 +10,7 @@ public class player : MonoBehaviour
 {
     public int velocidade = 10;
     Rigidbody rb;
-    public int forcaPulo = 10;
+    public int forcaPulo = 7;
     public bool noChao = false;
    
     void Start()
@@ -18,11 +18,11 @@ public class player : MonoBehaviour
         Debug.Log("start");
         TryGetComponent(out rb);
     }
-
+    
   
       private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.tag == "chão")
+            if (!noChao &&collision.gameObject.tag == "Chão")
             {
                 noChao = true;
             }
@@ -40,7 +40,17 @@ public class player : MonoBehaviour
         {
             rb.AddForce(Vector3.up * forcaPulo, ForceMode.Impulse);
         }
-            
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * forcaPulo, ForceMode.Impulse);
+            noChao = false;
+        }
+        
+        
+        
+        
+        
         if (transform.position.y < -5)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
