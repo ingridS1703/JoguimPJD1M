@@ -30,6 +30,7 @@ public class player : MonoBehaviour
     
     void Update()
     {
+        Debug.Log(message: "update");
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
