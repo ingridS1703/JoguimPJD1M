@@ -8,9 +8,9 @@ using Vector3 = UnityEngine.Vector3;
 
 public class player : MonoBehaviour
 {
-    public int velocidade = 10;
-    Rigidbody rb;
+    public int velocidade = 5;
     public int forcaPulo = 7;
+    Rigidbody rb;
     public bool noChao = false;
    
     void Start()
@@ -22,7 +22,7 @@ public class player : MonoBehaviour
   
       private void OnCollisionEnter(Collision collision)
         {
-            if (!noChao &&collision.gameObject.tag == "Chão")
+            if (!noChao && collision.gameObject.tag == "Chão")
             {
                 noChao = true;
             }
@@ -41,7 +41,7 @@ public class player : MonoBehaviour
             rb.AddForce(Vector3.up * forcaPulo, ForceMode.Impulse);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && noChao)
         {
             rb.AddForce(Vector3.up * forcaPulo, ForceMode.Impulse);
             noChao = false;
@@ -51,7 +51,7 @@ public class player : MonoBehaviour
         
         
         
-        if (transform.position.y < -5)
+        if (transform.position.y < -10)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
