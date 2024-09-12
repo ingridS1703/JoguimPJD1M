@@ -10,13 +10,16 @@ public class player : MonoBehaviour
 {
     public int velocidade = 5;
     public int forcaPulo = 7;
-    Rigidbody rb;
     public bool noChao = false;
-   
+    Rigidbody rb;
+    private AudioSource source;
+    
+    
     void Start()
     {
         Debug.Log("start");
         TryGetComponent(out rb);
+        TryGetComponent(out source);
     }
     
   
@@ -43,6 +46,9 @@ public class player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && noChao)
         {
+            //pulo
+            source.Play();
+            
             rb.AddForce(Vector3.up * forcaPulo, ForceMode.Impulse);
             noChao = false;
         }
